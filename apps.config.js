@@ -5,10 +5,10 @@ module.exports = {
     apps: [
         {
             //required
-            id: "tender",//编号
-            title: "招标人",//HTML文件标题
+            id: "app",//编号
+            title: "ElectronOCR",//HTML文件标题
             entry: {
-                name: "tender",//该应用的入口名
+                name: "app",//该应用的入口名
                 src: "./src/app/app.js"//该应用对应的入口文件
             },//入口文件
             indexPage: "./src/app/app.html",//主页文件

@@ -19,6 +19,7 @@ packager({
     platform,
     arch,
     out: `release/`,
+    override:true,
     download: {
         mirror: "https://npm.taobao.org/mirrors/electron/" //设定Electron的下载地址
     }

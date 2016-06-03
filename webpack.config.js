@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var fs = require("fs");
 
 //PostCSS plugins
 var autoprefixer = require('autoprefixer');
@@ -29,10 +30,20 @@ const port = require("./apps.config.js").devServer.port;
 //定义非直接引用依赖
 //定义第三方直接用Script引入而不需要打包的类库
 //使用方式即为var $ = require("jquery")
-const externals = {
-    jquery: "jQuery",
-    pageResponse: 'pageResponse'
+
+var nodeModules = {
+    jQuery: "jQuery",
+    pageResponse: 'pageResponse',
 };
+fs.readdirSync('node_modules')
+    .filter(function (x) {
+        return ['.bin'].indexOf(x) === -1;
+    })
+    .forEach(function (mod) {
+        nodeModules[mod] = 'commonjs ' + mod;
+    });
+
+const externals = nodeModules;
 
 
 /*********************************************************/
@@ -206,7 +217,7 @@ if (process.env.NODE_ENV === undefined || process.env.NODE_ENV === "develop") {
     config.output.filename = '[name].bundle.js.[hash:8]';
 
     //設置公共目錄名
-    config.output.publicPath = '/'//公共目录名
+    config.output.publicPath = './'//公共目录名
 
     //发布状态下添加Loader
     config.module.loaders.push({

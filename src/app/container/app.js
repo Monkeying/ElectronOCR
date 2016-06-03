@@ -2,6 +2,8 @@
  * Created by apple on 16/6/3.
  */
 import React, {PropTypes, Component} from "react";
+import {FileBrowserComponent} from "../../component/file/browser/file_browser";
+import {FileContentComponent} from "../../component/file/content/file_content";
 require("antd/dist/antd.min.css");
 require("normalize.css/normalize.css");
 require("./app.scss");
@@ -19,10 +21,10 @@ export class AppComponent extends Component {
 
             <section className="middle">
                 <section className="left">
-
+                    <FileBrowserComponent/>
                 </section>
                 <section className="right">
-
+                    <FileContentComponent/>
                 </section>
             </section>
 
