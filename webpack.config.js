@@ -35,13 +35,14 @@ var nodeModules = {
     jQuery: "jQuery",
     pageResponse: 'pageResponse',
 };
-fs.readdirSync('node_modules')
-    .filter(function (x) {
-        return ['.bin'].indexOf(x) === -1;
-    })
-    .forEach(function (mod) {
-        nodeModules[mod] = 'commonjs ' + mod;
-    });
+
+// fs.readdirSync('node_modules')
+//     .filter(function (x) {
+//         return ['.bin'].indexOf(x) === -1;
+//     })
+//     .forEach(function (mod) {
+//         nodeModules[mod] = 'commonjs ' + mod;
+//     });
 
 const externals = nodeModules;
 
