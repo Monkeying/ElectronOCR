@@ -50,8 +50,7 @@
   },
   "dependencies": {
     "desktop-screenshot": "0.0.6",
-    "shelljs": "^0.7.0",
-    "node-tesseract": "^0.2.7"
+    "shelljs": "^0.7.0"
   },
   "devDependencies": {
     "antd": "^1.0.1",

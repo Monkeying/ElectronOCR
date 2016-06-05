@@ -2,7 +2,7 @@
  * Created by apple on 16/6/3.
  */
 window.require('shelljs/global');
-const tesseract = window.require('node-tesseract');
+const tesseract = require('./tesseract.js');
 const Promise = require("es6-promise").Promise;
 
 const tesseract_options = {

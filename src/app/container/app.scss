@@ -1,6 +1,7 @@
 .app_container {
   height: 100%;
   width: 100%;
+  overflow: hidden;
 
   background: #c2e59c; /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #c2e59c, #64b3f4); /* Chrome 10-25, Safari 5.1-6 */
