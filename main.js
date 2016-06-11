@@ -21,7 +21,7 @@ function createWindow() {
     win.loadURL(`file://${__dirname}/dist/app.html`);
 
     // 启动调试工具,如果是开发环境下则不需要开启
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     // 设置窗口关闭事件
     win.on('closed', () => {
