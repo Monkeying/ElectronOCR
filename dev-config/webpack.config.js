@@ -13,6 +13,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var WebpackMd5Hash = require('webpack-md5-hash');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var validate = require("webpack-validator"); //用于webpack配置验证
 
 var NODE_ENV = process.env.NODE_ENV || "develop";//获取命令行变量
 
@@ -103,7 +104,7 @@ var config = {
     devtool: 'source-map',
     //所有的出口文件，注意，所有的包括图片等本机被放置到了dist目录下，其他文件放置到static目录下
     output: {
-        path: path.join(__dirname, 'dist'),//生成目录
+        path: path.join(__dirname, '../dist'),//生成目录
         filename: '[name].bundle.js',//文件名
         sourceMapFilename: '[name].bundle.map'//映射名
         // chunkFilename: '[id].[chunkhash].chunk.js',//块文件索引
@@ -229,7 +230,8 @@ if (process.env.NODE_ENV === undefined || process.env.NODE_ENV === "develop") {
     //添加代码压缩插件
     config.plugins.push(
         new webpack.optimize.UglifyJsPlugin({
-            compressor: {
+            minimize: true,
+            compress: {
                 warnings: false
             }
         }));
@@ -242,4 +244,5 @@ if (process.env.NODE_ENV === undefined || process.env.NODE_ENV === "develop") {
     }
 }
 
-module.exports = config;
+
+module.exports = validate(config);
