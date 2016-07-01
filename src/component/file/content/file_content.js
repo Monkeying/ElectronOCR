@@ -12,7 +12,7 @@ export class FileContentComponent extends Component {
     render() {
         return <section className="file-content-container">
             <pre className="text" id="file-content-text">
-                经过OCR识别处理处的文本会显示在这里嗷
+                The Recognized Text will be displayed here!
             </pre>
             <div className="operation">
                 <Button type="primary"
@@ -21,7 +21,7 @@ export class FileContentComponent extends Component {
                         clipboard.writeText(document.querySelector("#file-content-text").innerHTML);
                         }}
                 >
-                    复制
+                    Copy to Clipboard
                 </Button>
             </div>
         </section>

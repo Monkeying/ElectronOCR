@@ -15,10 +15,10 @@ let win;
  */
 function createWindow() {
     // 创建类似于浏览器的窗口
-    win = new BrowserWindow({width: 800, height: 600});
+    win = new BrowserWindow({width: 1000, height: 600});
 
     // 加载应用入口文件,本文件为测试文件,因此加载的是测试
-    win.loadURL(`file://${__dirname}/src/dev.html`);
+    win.loadURL(`file://${__dirname}/dev-config/dev.html`);
 
     // 启动调试工具,如果是开发环境下则不需要开启
     win.webContents.openDevTools();

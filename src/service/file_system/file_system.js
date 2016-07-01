@@ -8,7 +8,6 @@ const Promise = require('es6-promise').Promise;
 const path = window.require("path");
 
 
-
 /**
  * @function 文件系统以及辅助类
  */
@@ -17,7 +16,7 @@ export class FileSystemService {
     constructor() {
 
         //支持的图片类型
-        this.SupportedImageExtensions = ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'tiff'];
+        this.SupportedImageExtensions = ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'tiff', 'tif'];
 
         this.openImageFiles = this.openImageFiles.bind(this);
 
@@ -96,7 +95,7 @@ export class FileSystemService {
     }
 
     /**
-     * @region 私有方法
+     * @region 判断是否是支持的文件类型
      */
 
     _isSupportedImageFile(file) {

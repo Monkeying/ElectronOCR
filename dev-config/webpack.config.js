@@ -30,7 +30,7 @@ const port = require("./apps.config.js").devServer.port;
 
 //定义非直接引用依赖
 //定义第三方直接用Script引入而不需要打包的类库
-//使用方式即为var $ = require("jquery")
+//使用方式即为var $ = require("jQuery")
 
 var nodeModules = {
     jQuery: "jQuery",
@@ -216,7 +216,7 @@ if (process.env.NODE_ENV === undefined || process.env.NODE_ENV === "develop") {
     config.entry = proEntry;
 
     //如果是生成环境下，将文件名加上hash
-    config.output.filename = '[name].bundle.js.[hash:8]';
+    config.output.filename = '[name].bundle.[hash:8].js';
 
     //設置公共目錄名
     config.output.publicPath = './'//公共目录名

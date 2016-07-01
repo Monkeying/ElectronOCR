@@ -15,11 +15,12 @@ app.use(require('webpack-dev-middleware')(compiler, {
 app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname + "/", "dev.html"));
+    res.sendFile(path.join(__dirname + "/", "dev.html"));
 });
 
 //监听本地端口
 app.listen(require("./apps.config").devServer.port, 'localhost', function (err) {
+    
     if (err) {
         console.log(err);
         return;

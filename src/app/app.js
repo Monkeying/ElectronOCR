@@ -8,6 +8,8 @@ import React from "react";
 import {render} from "react-dom";
 import {AppComponent} from "./container/app.js";
 
+window.$ = window.jQuery = require('jquery');
+
 render(
     <AppComponent/>
     , document.getElementById('root')

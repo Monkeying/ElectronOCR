@@ -39,6 +39,31 @@ brew install tesseract --all-languages
 
 笔者Web部分还是采用Webpack+React+Redux(待加入)，关于这部分的单独代码可以借鉴[我的Webpack套装](https://segmentfault.com/a/1190000005122575)以及[**Webpack-React-Redux-Boilerplate**](https://github.com/wxyyxc1992/Webpack-React-Redux-Boilerplate)这个示范Boilerplate。需要注意的是，在Electron 1.x之后API和0.x系列有了较大的变化，很多Github上的项目在升级到1.2.0之后不可用。
 
+## jQuery引入问题
+
+```
+if ( typeof module === "object" && typeof module.exports === "object" ) {
+  // set jQuery in `module`
+} else {
+  // set jQuery in `window`
+}
+```
+jQuery的源代码中有如下定义,因为Electron实际上定义了module,导致window中没有挂载上$或者jQuery,修复方式如下:
+```
+<html>
+<head>
+    <title>MyApp</title>
+    <link rel="stylesheet" type="text/css" href="./lib/w2ui-1.4.3.css"/>
+    <script type="text/javascript" src="./lib/require.js"></script>
+    <script type="text/javascript" src="./lib/jquery-2.1.4.js" onload="$ = jQuery = module.exports;"></script>
+    <script type="text/javascript" src="./lib/w2ui-1.4.3.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+    // use global $ and w2ui here... 
+    ...
+```
+
 ## 支持Hot Reload的环境搭建
 
 Electron实际上是一个封装好的近似浏览器，因此Hot Reload与纯粹的Web开发区别不大，都是先起一个Hot Load Server，监听3000端口。不过需要做修改的是，在Electron中所有的脚本都要从localhost:3000加载，主要修改有：

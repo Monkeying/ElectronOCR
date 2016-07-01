@@ -1,26 +1,35 @@
 /**
  * Created by apple on 16/6/3.
  */
+
 import React, {PropTypes, Component} from "react";
 import {FileSystemService} from "../../../service/file_system/file_system";
-import {Carousel, Button, message} from "antd";
+import {Carousel, Button, message, Modal} from "antd";
 import {OCRService} from "../../../service/ocr/ocr";
+import i18n from "../../../app/config/i18n";
+import ScreenShot from "../../screenshot/screenshot";
 var Slider = require('react-slick');
 const fileSystemService = new FileSystemService();
 const ocrService = new OCRService();
 require("./file_browser.scss");
+const path = window.require("path");
+
+const i18nInstance = new i18n();
+
 export class FileBrowserComponent extends Component {
 
     /**
      * @function 构造函数
      */
     constructor(props) {
+
         super(props);
 
         this.state = {
-            imageFiles: ["http://o6v08w541.bkt.clouddn.com/665689B4-48D6-4CB8-ACFD-19D1F75236E0.png"],
+            imageFiles: [path.resolve("./assets/images/screenshot/screenshot-en.png")],
             current: 0,//当前的图片
-            processing: false
+            processing: false,
+            capture_window: false
         };
 
         this._handleOpenFileClick = this._handleOpenFileClick.bind(this);
@@ -64,17 +73,33 @@ export class FileBrowserComponent extends Component {
             let ele = document.querySelector("#file-content-text");
 
             ele.innerHTML = text;
+
+            //设置当前处理完毕
             this.setState({processing: false});
 
 
         }).catch(()=> {
-            message.error('请不要使用默认的网络图片或者确保已经安装好了Tesseract!');
+            //请不要使用默认的网络图片或者确保已经安装好了Tesseract!
+            message.error('Please dont use online image or enable Tesseract!');
             this.setState({processing: false});
 
         });
 
     }
 
+    /**
+     * @function 处理系统截图
+     * @private
+     */
+    _handleCaptureClick() {
+
+    }
+
+    /**
+     * @function 渲染图片文件
+     * @returns {Array}
+     * @private
+     */
     _renderImageFiles() {
 
         var result = [];
@@ -82,7 +107,7 @@ export class FileBrowserComponent extends Component {
         this.state.imageFiles.forEach((imageFile, index)=> {
 
             result.push(
-                <div className="image-item" style={{
+                <div className="image-item" onClick={()=>{console.log(index)}} style={{
                     backgroundImage:`url(${imageFile})`
                 }}>
                 </div>
@@ -96,12 +121,23 @@ export class FileBrowserComponent extends Component {
 
         return (
             <section className="file_browser_container">
+
                 <div className="file-operation">
+
                     <Button type="primary"
                             icon="search"
+                            className="file-operation__open-btn"
                             onClick={this._handleOpenFileClick}
                             disabled={this.state.processing}
-                    >打开文件</Button>
+                    >{i18nInstance.current.button.open}</Button>
+
+                    <Button type="primary"
+                            icon="scan"
+                            className="file-operation__capture-btn"
+                            onClick={()=>{this.setState({capture_window:true})}}
+                            disabled={this.state.processing}
+                    >{"Use Screen Capture"}</Button>
+
                 </div>
 
                 <Carousel afterChange={(current)=>{
@@ -116,9 +152,20 @@ export class FileBrowserComponent extends Component {
                             onClick={this._handleOCRClick}
                             loading={this.state.processing}
                     >
-                        OCR识别
+                        OCR By Tesseract
                     </Button>
                 </section>
+
+                <Modal title="Pick One ScreenShot"
+                       visible={this.state.capture_window}
+                       width={800}
+                       onCancel={()=>{this.setState({capture_window:false})}}
+                       footer={[]}
+
+                >
+                    <ScreenShot/>
+
+                </Modal>
             </section>
         );
     }

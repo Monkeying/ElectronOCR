@@ -7,6 +7,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @at-root #{&}__open-btn {
+      margin-right: 10px;
+    }
+
   }
 
   .ant-carousel {
